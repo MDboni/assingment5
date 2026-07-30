@@ -3,13 +3,14 @@
 import { revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
 
-import type { ApiError, ApiResult, LoginResponse, User } from "@/lib/types";
+import type { ApiError, ApiResult, LoginResponse, User, UserRole } from "@/lib/types";
 
 export type ActionState = {
   success: boolean;
   message: string;
   /** field-wise error → form-এ inline দেখানোর জন্য */
   fieldErrors?: Record<string, string>;
+  role?: UserRole; // loginUser-এর জন্য, redirect-এ use করা হয়
 };
 
 /** backend-এর errorDetails[] → { email: "...", password: "..." } */
