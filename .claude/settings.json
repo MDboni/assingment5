@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//d/L2/**)",
+      "Read(//d/L2/assingment4/**)",
+      "Read(//d/L2/assingment4//**)"
+    ]
+  }
+}
