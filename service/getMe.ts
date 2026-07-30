@@ -1,39 +1,28 @@
-"use server"
-
 import { cookies } from "next/headers";
 
-export const getMe = async () => {
-    const cookieStore = await cookies();
+import type { ApiResult, User } from "@/lib/types";
 
-    const accessToken = cookieStore.get("accessToken")?.value || null;
+/**
+ * বর্তমান logged-in user — না থাকলে null।
+ * শুধু Server Component / Server Action থেকে ডাকবে।
+ */
+export const getCurrentUser = async (): Promise<User | null> => {
+  const cookieStore = await cookies();
+  const accessToken = cookieStore.get("accessToken")?.value;
 
-    if(!accessToken){
-        // throw new Error("User Not Logged In!");
+  if (!accessToken) return null;
 
-        return {
-            success : false,
-            message : "User not logged in!"
-        }
-    }
-
+  try {
     const res = await fetch(`${process.env.BACKEND_API_URL}/api/users/me`, {
-        headers : {
-            // Authorization : accessToken as unknown as string,
-            // Authorization : `${accessToken}`,
-            // Authorization : `Bearer ${accessToken}`
-
-            Cookie : `accessToken=${accessToken}`
-        },
-
-        cache : "force-cache",
-        next : {
-            revalidate : 60 * 60 * 24, // 1day
-            tags : ["my-profile"]
-        }
+      headers: { Cookie: `accessToken=${accessToken}` },
+      cache: "no-store",
     });
 
-    const result = res.json();
+    const result = (await res.json()) as ApiResult<User>;
 
-
-    return result
-}
+    return result.success ? result.data : null;
+  } catch {
+    // backend বন্ধ থাকলেও navbar যেন crash না করে
+    return null;
+  }
+};
