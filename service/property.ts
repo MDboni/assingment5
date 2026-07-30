@@ -1,4 +1,5 @@
 import type { ApiMeta, ApiResult, Property } from "@/lib/types";
+import type { PropertyDetail } from "@/lib/types";
 
 /** backend যে query param গুলো বোঝে — আমি ওদের interface থেকে হুবহু নিয়েছি */
 export type PropertyQuery = {
@@ -58,5 +59,28 @@ export const getProperties = async (
       meta: null,
       error: "Unable to load properties right now.",
     };
+  }
+};
+
+
+
+export const getPropertyById = async (
+  id: string
+): Promise<{ property: PropertyDetail | null; error: string | null }> => {
+  try {
+    const res = await fetch(
+      `${process.env.BACKEND_API_URL}/api/properties/${id}`,
+      { next: { revalidate: 60, tags: ["properties", `property-${id}`] } }
+    );
+
+    const result = (await res.json()) as ApiResult<PropertyDetail>;
+
+    if (!result.success) {
+      return { property: null, error: result.message };
+    }
+
+    return { property: result.data, error: null };
+  } catch {
+    return { property: null, error: "Unable to load this property." };
   }
 };
