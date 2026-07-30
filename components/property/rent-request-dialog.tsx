@@ -25,7 +25,7 @@ import {
   rentalRequestSchema,
   type RentalRequestValues,
 } from "@/lib/schemas/rental";
-import { createRentalRequest } from "@/service/rental";
+import { createRentalRequest } from "@/service/rental.action";
 
 export function RentRequestDialog({
   propertyId,
