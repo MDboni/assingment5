@@ -18,6 +18,12 @@ import { Button } from "@/components/ui/button";
 import { formatCurrency, formatDate } from "@/lib/format";
 import { getPropertyById } from "@/service/property";
 
+import { Suspense } from "react";
+
+import { RentCta } from "@/components/property/rent-cta";
+import { Skeleton } from "@/components/ui/skeleton";
+
+
 type Params = { params: Promise<{ id: string }> };
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
@@ -231,14 +237,10 @@ export default async function PropertyDetailsPage({ params }: Params) {
                 </span>
               </div>
 
-              {/* পরের ধাপে এটাই আসল dialog হবে */}
-              <Button size="lg" className="mt-6 w-full" disabled>
-                Request to rent
-              </Button>
+              <Suspense fallback={<Skeleton className="mt-6 h-9 w-full" />}>
+                <RentCta property={property} />
+              </Suspense>
 
-              <p className="mt-2.5 text-center text-[10px] text-muted-foreground">
-                No charge until the landlord approves.
-              </p>
             </div>
 
             {/* ── landlord ── */}
