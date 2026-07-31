@@ -158,3 +158,8 @@ export type PropertyDetail = Property & {
     total: number;
   };
 };
+
+
+export type LandlordProperty = Property & {
+  pendingRequestCount: number;
+};
