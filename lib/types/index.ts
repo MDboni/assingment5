@@ -163,3 +163,14 @@ export type PropertyDetail = Property & {
 export type LandlordProperty = Property & {
   pendingRequestCount: number;
 };
+
+
+
+/** GET /api/admin/users — */
+export type AdminUser = User & {
+  _count: {
+    properties: number;
+    tenantRentals: number;
+    payments: number;
+  };
+};
