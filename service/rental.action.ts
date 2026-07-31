@@ -59,3 +59,32 @@ export const createRentalRequest = async (payload: {
 
   return { success: true, message: result.message };
 };
+
+/**
+ * PATCH /api/rentals/:id/cancel
+ * Backend শুধু PENDING আর APPROVED request cancel করতে দেয়।
+ */
+export const cancelRentalRequest = async (
+  rentalRequestId: string
+): Promise<RentalActionState> => {
+  const result = await authFetch<RentalRequest>(
+    `/api/rentals/${rentalRequestId}/cancel`,
+    { method: "PATCH" }
+  );
+
+  if (!result) {
+    return {
+      success: false,
+      message: "Cannot reach the server. Please try again.",
+    };
+  }
+
+  if (!result.success) {
+    return { success: false, message: result.message };
+  }
+
+  revalidateTag("my-rentals", "max");
+  revalidateTag("landlord-requests", "max");
+
+  return { success: true, message: result.message };
+};

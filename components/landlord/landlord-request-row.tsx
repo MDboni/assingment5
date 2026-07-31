@@ -1,9 +1,11 @@
+"use client";
+
 import {
   CalendarBlankIcon,
   EnvelopeSimpleIcon,
   PhoneIcon,
   UserIcon,
-} from "@phosphor-icons/react/dist/ssr";
+} from "@phosphor-icons/react";
 import Link from "next/link";
 
 import { CompleteRentalButton } from "@/components/landlord/complete-rental-button";
@@ -11,13 +13,31 @@ import { RequestDecision } from "@/components/landlord/request-decision";
 import { RentalStatusBadge } from "@/components/shared/status-badge";
 import { formatCurrency, formatDate } from "@/lib/format";
 import type { RentalRequest } from "@/lib/types";
+import { cn } from "@/lib/utils";
 
-export function LandlordRequestRow({ request }: { request: RentalRequest }) {
+export function LandlordRequestRow({
+  request,
+  onDecide,
+  isPending,
+}: {
+  request: RentalRequest;
+  onDecide: (
+    requestId: string,
+    status: "APPROVED" | "REJECTED",
+    landloardNote?: string
+  ) => void;
+  isPending: boolean;
+}) {
   const tenantName = request.tenant?.name ?? "Tenant";
   const propertyTitle = request.property?.title ?? "Property";
 
   return (
-    <article className="border border-border bg-card p-4">
+    <article
+      className={cn(
+        "border border-border bg-card p-4 transition-opacity",
+        isPending && "opacity-70"
+      )}
+    >
       {/* ── উপরের সারি ── */}
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div className="min-w-0">
@@ -97,6 +117,8 @@ export function LandlordRequestRow({ request }: { request: RentalRequest }) {
             tenantName={tenantName}
             propertyTitle={propertyTitle}
             quotedAmount={request.quotedAmount}
+            onDecide={onDecide}
+            isPending={isPending}
           />
         )}
 

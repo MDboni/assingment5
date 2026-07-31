@@ -6,7 +6,7 @@ import { EmptyState } from "@/components/dashboard/empty-state";
 import { ErrorState } from "@/components/dashboard/error-state";
 import { PageHeader } from "@/components/dashboard/page-header";
 import { StatusFilter } from "@/components/dashboard/status-filter";
-import { LandlordRequestRow } from "@/components/landlord/landlord-request-row";
+import { RequestList } from "@/components/landlord/request-list";
 import { Button } from "@/components/ui/button";
 import { getLandlordRequests } from "@/service/landlord";
 
@@ -74,11 +74,7 @@ export default async function LandlordRequestsPage({
           }
         />
       ) : (
-        <div className="space-y-3">
-          {sorted.map((request) => (
-            <LandlordRequestRow key={request.id} request={request} />
-          ))}
-        </div>
+        <RequestList requests={sorted} />
       )}
     </div>
   );

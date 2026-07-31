@@ -4,12 +4,19 @@ import Link from "next/link";
 
 import { PayNowButton } from "@/components/dashboard/pay-now-button";
 import { RentalStatusBadge } from "@/components/shared/status-badge";
+import { CancelRequestButton } from "@/components/tenant/cancel-request-button";
+import { ReviewDialog } from "@/components/tenant/review-dialog";
 import { formatCurrency, formatDate } from "@/lib/format";
 import type { RentalRequest } from "@/lib/types";
 
 export function RentalRequestCard({ rental }: { rental: RentalRequest }) {
   const property = rental.property;
   const cover = property?.images?.[0];
+  const propertyTitle = property?.title ?? "Property";
+
+  // backend শুধু PENDING আর APPROVED cancel করতে দেয়
+  const canCancel =
+    rental.status === "PENDING" || rental.status === "APPROVED";
 
   return (
     <article className="flex flex-col gap-4 border border-border bg-card p-4 sm:flex-row">
@@ -83,16 +90,40 @@ export function RentalRequestCard({ rental }: { rental: RentalRequest }) {
             </p>
           </div>
 
-          {/* APPROVED হলেই কেবল টাকা দেওয়ার সুযোগ */}
-          {rental.status === "APPROVED" && (
-            <PayNowButton rentalRequestId={rental.id} />
-          )}
+          {/* status অনুযায়ী tenant কী করতে পারে */}
+          <div className="flex flex-wrap items-center justify-end gap-1.5">
+            {canCancel && (
+              <CancelRequestButton
+                rentalRequestId={rental.id}
+                propertyTitle={propertyTitle}
+              />
+            )}
 
-          {rental.status === "PAYMENT_PENDING" && (
-            <p className="text-[10px] text-muted-foreground">
-              Awaiting confirmation…
-            </p>
-          )}
+            {/* APPROVED হলেই কেবল টাকা দেওয়ার সুযোগ */}
+            {rental.status === "APPROVED" && (
+              <PayNowButton rentalRequestId={rental.id} />
+            )}
+
+            {rental.status === "PAYMENT_PENDING" && (
+              <p className="text-[10px] text-muted-foreground">
+                Awaiting confirmation…
+              </p>
+            )}
+
+            {rental.status === "ACTIVE" && (
+              <p className="text-[10px] text-muted-foreground">
+                Review unlocks when the rental ends
+              </p>
+            )}
+
+            {/* backend শুধু COMPLETED rental-এ review নেয় */}
+            {rental.status === "COMPLETED" && (
+              <ReviewDialog
+                rentalRequestId={rental.id}
+                propertyTitle={propertyTitle}
+              />
+            )}
+          </div>
         </div>
       </div>
     </article>
