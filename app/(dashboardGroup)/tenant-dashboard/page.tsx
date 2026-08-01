@@ -20,7 +20,7 @@ import { getMyRentals } from "@/service/rental";
 export const metadata: Metadata = { title: "Tenant dashboard" };
 
 export default async function TenantDashboardPage() {
-  // দুটো call একসাথে — একটার জন্য অন্যটা অপেক্ষা করবে না
+  // Run both calls at the same time — neither waits for the other.
   const [rentalResult, paymentResult] = await Promise.all([
     getMyRentals({ limit: "50" }),
     getMyPayments({ limit: "50" }),
@@ -45,7 +45,7 @@ export default async function TenantDashboardPage() {
     .filter((payment) => payment.status === "COMPLETED")
     .reduce((sum, payment) => sum + payment.amount, 0);
 
-  // সাম্প্রতিক ৩টা, কিন্তু টাকা দেওয়ার বাকি থাকলে সেগুলো আগে
+  // Show the latest three, but put unpaid ones first.
   const highlighted = [...rentals]
     .sort((a, b) => {
       const priority = (status: string) => (status === "APPROVED" ? 0 : 1);
@@ -66,7 +66,7 @@ export default async function TenantDashboardPage() {
         }
       />
 
-      {/* ── stat cards ── */}
+      {/* ── Stat cards ── */}
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
         <StatCard
           label="Total requests"
@@ -92,7 +92,7 @@ export default async function TenantDashboardPage() {
         />
       </div>
 
-      {/* ── টাকা দেওয়ার তাগিদ ── */}
+      {/* ── Payment reminder ── */}
       {payableCount > 0 && (
         <div className="border border-primary/30 bg-primary/5 p-4">
           <p className="text-xs font-medium text-primary">
@@ -102,7 +102,7 @@ export default async function TenantDashboardPage() {
         </div>
       )}
 
-      {/* ── সাম্প্রতিক request ── */}
+      {/* ── Recent requests ── */}
       <section>
         <div className="mb-4 flex items-center justify-between">
           <h2 className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">

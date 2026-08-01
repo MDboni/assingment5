@@ -3,7 +3,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 export function PropertyCardSkeleton() {
   return (
     <div className="flex flex-col border border-border bg-card">
-      {/* card-এর ছবির মতো হুবহু একই aspect ratio */}
+      {/* Match the card image's aspect ratio exactly. */}
       <Skeleton className="aspect-[4/3] w-full" />
 
       <div className="flex flex-1 flex-col p-4">

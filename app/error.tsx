@@ -14,7 +14,7 @@ export default function Error({
   unstable_retry: () => void;
 }) {
   useEffect(() => {
-    // বাস্তব app-এ এখানে Sentry-র মতো service-এ পাঠাতাম
+    // In a real app, this is where we'd send it to a service like Sentry.
     console.error(error);
   }, [error]);
 
@@ -34,7 +34,7 @@ export default function Error({
           or head back home.
         </p>
 
-        {/* digest = server-এর log-এ এই error খুঁজে পাওয়ার আইডি */}
+        {/* digest is the ID for finding this error in server logs */}
         {error.digest && (
           <p className="mt-4 border border-border bg-muted/40 px-3 py-2 font-mono text-[10px] text-muted-foreground">
             Error ID: {error.digest}

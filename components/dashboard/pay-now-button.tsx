@@ -29,7 +29,7 @@ export function PayNowButton({
 
     toast.success(result.message);
 
-    // Stripe-এর নিজের ডোমেইনে যাচ্ছি — router.push নয়, পুরো navigation
+    // Redirect to Stripe's domain directly; use a full navigation instead of router.push.
     window.location.href = result.checkoutUrl;
   };
 

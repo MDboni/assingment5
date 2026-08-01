@@ -15,12 +15,12 @@ export const metadata: Metadata = { title: "Profile settings" };
 export default async function ProfilePage() {
   const user = await getCurrentUser();
 
-  // proxy.ts আগেই আটকায় — এটা দ্বিতীয় স্তর
+  // proxy.ts blocks this earlier — this is a second layer.
   if (!user) redirect("/login?redirect=/profile");
 
   return (
     <div className="mx-auto w-full max-w-2xl px-5 py-12 lg:px-8">
-      {/* ── শিরোনাম ── */}
+      {/* ── Title ── */}
       <div className="flex flex-col gap-4 border-b border-border pb-6 sm:flex-row sm:items-end sm:justify-between">
         <div className="flex items-center gap-4">
           <span className="grid size-12 shrink-0 place-items-center bg-primary text-sm font-semibold text-primary-foreground">
@@ -64,7 +64,7 @@ export default async function ProfilePage() {
         </Button>
       </div>
 
-      {/* ── ব্যক্তিগত তথ্য ── */}
+      {/* ── Personal details ── */}
       <section className="mt-8 border border-border bg-card p-6">
         <h2 className="text-[10px] uppercase tracking-[0.2em] text-primary">
           Personal details
@@ -77,7 +77,7 @@ export default async function ProfilePage() {
         <ProfileForm user={user} />
       </section>
 
-      {/* ── পাসওয়ার্ড ── */}
+      {/* ── Password ── */}
       <section className="mt-6 border border-border bg-card p-6">
         <h2 className="text-[10px] uppercase tracking-[0.2em] text-primary">
           Password

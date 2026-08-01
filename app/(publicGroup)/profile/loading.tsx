@@ -3,7 +3,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 export default function ProfileLoading() {
   return (
     <div className="mx-auto w-full max-w-2xl px-5 py-12 lg:px-8">
-      {/* শিরোনাম */}
+      {/* Title */}
       <div className="flex flex-col gap-4 border-b border-border pb-6 sm:flex-row sm:items-end sm:justify-between">
         <div className="flex items-center gap-4">
           <Skeleton className="size-12 shrink-0" />
@@ -17,7 +17,7 @@ export default function ProfileLoading() {
         <Skeleton className="h-9 w-36" />
       </div>
 
-      {/* দুটো form card */}
+      {/* Two form cards */}
       {[4, 3].map((fieldCount, cardIndex) => (
         <section
           key={cardIndex}

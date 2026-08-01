@@ -44,7 +44,7 @@ export function UserMenu({ user }: { user: User }) {
       toast.success("Signed out successfully");
 
       router.push("/login");
-      router.refresh(); // Server Component গুলো নতুন করে render হোক
+      router.refresh(); // Re-render the Server Components.
     });
   };
 
@@ -74,7 +74,7 @@ export function UserMenu({ user }: { user: User }) {
       </DropdownMenuTrigger>
 
       <DropdownMenuContent align="end" sideOffset={8} className="w-56">
-        {/* ── পরিচয় ── */}
+        {/* ── Identity ── */}
         <div className="border-b border-border px-2.5 py-2.5">
           <p className="truncate text-xs font-medium">{user.name}</p>
           <p className="mt-0.5 truncate text-[10px] text-muted-foreground">

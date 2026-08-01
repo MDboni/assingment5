@@ -4,9 +4,9 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 /**
- * Stripe-এর webhook backend-এ পৌঁছাতে কয়েক সেকেন্ড লাগে।
- * ততক্ষণ পাতাটা নিজে থেকে refresh হতে থাকবে — user-কে
- * "refresh করুন" বলতে হবে না।
+ * Stripe's webhook can take a few seconds to reach the backend.
+ * Until then, the page keeps refreshing on its own, so the user
+ * does not need to press refresh.
  */
 export function PaymentStatusPoller({ maxAttempts = 6 }: { maxAttempts?: number }) {
   const router = useRouter();

@@ -45,7 +45,7 @@ export default async function PropertyDetailsPage({ params }: Params) {
   const { id } = await params;
   const { property } = await getPropertyById(id);
 
-  // backend 404 দিলে Next.js-এর not-found.tsx দেখাও
+  // Show Next.js's not-found.tsx when the backend returns 404.
   if (!property) notFound();
 
   const specs = [
@@ -80,11 +80,11 @@ export default async function PropertyDetailsPage({ params }: Params) {
       </nav>
 
       <div className="mt-6 lg:grid lg:grid-cols-[1.6fr_1fr] lg:gap-10">
-        {/* ══ বাঁ পাশ ══ */}
+        {/* ══ Left side ══ */}
         <div>
           <PropertyGallery images={property.images} title={property.title} />
 
-          {/* ── শিরোনাম ── */}
+          {/* ── Title ── */}
           <div className="mt-8 border-b border-border pb-6">
             <div className="flex flex-wrap items-center gap-2">
               {property.category && (
@@ -112,7 +112,7 @@ export default async function PropertyDetailsPage({ params }: Params) {
             </p>
           </div>
 
-          {/* ── স্পেক ── */}
+          {/* ── Specs ── */}
           <div className="mt-6 grid grid-cols-2 gap-px border border-border bg-border sm:grid-cols-4">
             {specs.map((spec) => (
               <div key={spec.label} className="bg-background p-4">
@@ -125,7 +125,7 @@ export default async function PropertyDetailsPage({ params }: Params) {
             ))}
           </div>
 
-          {/* ── বর্ণনা ── */}
+          {/* ── Description ── */}
           {property.description && (
             <section className="mt-10">
               <h2 className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
@@ -137,7 +137,7 @@ export default async function PropertyDetailsPage({ params }: Params) {
             </section>
           )}
 
-          {/* ── সুবিধা ── */}
+          {/* ── Amenities ── */}
           {property.amenities.length > 0 && (
             <section className="mt-10">
               <h2 className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
@@ -161,7 +161,7 @@ export default async function PropertyDetailsPage({ params }: Params) {
             </section>
           )}
 
-          {/* ── রিভিউ ── */}
+          {/* ── Reviews ── */}
           <section className="mt-10">
             <h2 className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
               Reviews ({property.ratingSummary.total})
@@ -211,7 +211,7 @@ export default async function PropertyDetailsPage({ params }: Params) {
           </section>
         </div>
 
-        {/* ══ ডান পাশ: sticky booking card ══ */}
+        {/* ══ Right side: sticky booking card ══ */}
         <aside className="mt-10 lg:mt-0">
           <div className="sticky top-20 space-y-4">
             <div className="border border-border bg-card p-6">

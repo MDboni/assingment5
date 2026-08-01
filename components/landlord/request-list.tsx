@@ -15,11 +15,11 @@ type OptimisticUpdate = {
 };
 
 /**
- * Approve/Reject-এ optimistic update।
+ * Optimistic updates for approve/reject.
  *
- * useOptimistic শুধু transition চলাকালীন টিকে থাকে — তাই server call টাও
- * একই startTransition-এর ভিতরে রাখতে হয়। কাজ শেষ হলে React নিজে থেকেই
- * আসল (server থেকে আসা) ডেটায় ফিরে যায়, তাই ম্যানুয়ালি undo করতে হয় না।
+ * useOptimistic only persists during the transition, so the server call must
+ * also stay inside the same startTransition. Once it finishes, React returns
+ * to the real server data automatically, so no manual undo is needed.
  */
 export function RequestList({ requests }: { requests: RentalRequest[] }) {
   const router = useRouter();
@@ -45,17 +45,17 @@ export function RequestList({ requests }: { requests: RentalRequest[] }) {
     landloardNote?: string
   ) => {
     startTransition(async () => {
-      // ১. সাথে সাথে badge বদলে দাও — server-এর অপেক্ষা নয়
+      // 1. Update the badge immediately — no need to wait for the server.
       applyOptimistic({ id: requestId, status, landloardNote });
 
-      // ২. তারপর সত্যিকারের call
+      // 2. Then make the real call.
       const result = await decideRentalRequest(requestId, {
         status,
         ...(landloardNote ? { landloardNote } : {}),
       });
 
       if (!result.success) {
-        // optimistic state নিজে থেকেই ফিরে যাবে, শুধু জানিয়ে দিই
+        // The optimistic state will revert on its own; just show the error.
         toast.error(result.message);
         return;
       }

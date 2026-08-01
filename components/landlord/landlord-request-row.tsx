@@ -38,7 +38,7 @@ export function LandlordRequestRow({
         isPending && "opacity-70"
       )}
     >
-      {/* ── উপরের সারি ── */}
+      {/* ── Top row ── */}
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div className="min-w-0">
           <Link
@@ -57,7 +57,7 @@ export function LandlordRequestRow({
         <RentalStatusBadge status={request.status} />
       </div>
 
-      {/* ── যোগাযোগ ── */}
+      {/* ── Contact ── */}
       <div className="mt-3 flex flex-wrap gap-x-5 gap-y-1.5 text-[10px] text-muted-foreground">
         {request.tenant?.email && (
           <span className="inline-flex items-center gap-1">
@@ -83,7 +83,7 @@ export function LandlordRequestRow({
         )}
       </div>
 
-      {/* ── tenant-এর বার্তা ── */}
+      {/* ── Tenant message ── */}
       {request.message && (
         <p className="mt-3 border-l-2 border-border bg-muted/40 px-3 py-2 text-[10px] leading-relaxed text-muted-foreground">
           <span className="text-foreground">{tenantName}:</span>{" "}
@@ -91,7 +91,7 @@ export function LandlordRequestRow({
         </p>
       )}
 
-      {/* ── নিজের আগের নোট ── */}
+      {/* ── Your previous note ── */}
       {request.landloardNote && (
         <p className="mt-2 border-l-2 border-primary/40 bg-primary/5 px-3 py-2 text-[10px] leading-relaxed text-muted-foreground">
           <span className="text-foreground">Your note:</span>{" "}
@@ -99,7 +99,7 @@ export function LandlordRequestRow({
         </p>
       )}
 
-      {/* ── নিচের সারি ── */}
+      {/* ── Bottom row ── */}
       <div className="mt-4 flex flex-wrap items-end justify-between gap-3 border-t border-border pt-4">
         <div>
           <p className="text-sm font-semibold text-primary">
@@ -110,7 +110,7 @@ export function LandlordRequestRow({
           </p>
         </div>
 
-        {/* status অনুযায়ী কী করা যাবে */}
+        {/* What can be done based on status */}
         {request.status === "PENDING" && (
           <RequestDecision
             requestId={request.id}

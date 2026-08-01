@@ -50,7 +50,7 @@ export default async function LandlordDashboardPage() {
     (request) => request.status === "PENDING"
   );
 
-  // চলমান ভাড়া থেকে মাসিক আয়
+  // Monthly income from active rentals.
   const monthlyIncome = requests
     .filter((request) => request.status === "ACTIVE")
     .reduce((sum, request) => sum + request.quotedAmount, 0);
@@ -98,7 +98,7 @@ export default async function LandlordDashboardPage() {
         />
       </div>
 
-      {/* ── সিদ্ধান্ত নেওয়ার তাগিদ ── */}
+      {/* ── Decision prompt ── */}
       {pendingRequests.length > 0 && (
         <section className="border border-amber-500/30 bg-amber-500/5 p-5">
           <div className="flex items-start justify-between gap-4">
@@ -146,7 +146,7 @@ export default async function LandlordDashboardPage() {
         </section>
       )}
 
-      {/* ── property তালিকা ── */}
+      {/* ── Property list ── */}
       <section>
         <div className="mb-4 flex items-center justify-between">
           <h2 className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">

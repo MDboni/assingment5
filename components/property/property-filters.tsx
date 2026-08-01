@@ -15,7 +15,7 @@ export function PropertyFilters({ categories }: { categories: Category[] }) {
   const searchParams = useSearchParams();
   const [isPending, startTransition] = useTransition();
 
-  /** URL-কে single source of truth ধরে নতুন URL বানাই */
+  /** Build a new URL while treating the URL as the single source of truth. */
   const buildUrl = (updates: Record<string, string | null>) => {
     const params = new URLSearchParams(searchParams.toString());
 
@@ -24,8 +24,8 @@ export function PropertyFilters({ categories }: { categories: Category[] }) {
       else params.delete(key);
     });
 
-    // filter বদলালে ১ নম্বর পাতায় ফিরে যেতে হবে,
-    // নাহলে ৫ নম্বর পাতায় দাঁড়িয়ে "কিছু পাওয়া যায়নি" দেখাবে
+    // When filters change, return to page 1,
+    // otherwise page 5 might show "nothing found".
     params.delete("page");
 
     return `${pathname}?${params.toString()}`;
@@ -37,18 +37,18 @@ export function PropertyFilters({ categories }: { categories: Category[] }) {
     });
   };
 
-  /** এখন যেটা set আছে সেটাতেই ক্লিক করলে খুলে যাবে (toggle) */
+  /** Clicking the currently selected value toggles it off. */
   const toggle = (key: string, value: string) =>
     apply({ [key]: searchParams.get(key) === value ? null : value });
 
   const isOn = (key: string, value: string) => searchParams.get(key) === value;
 
-  // ── search আর price: টাইপ করার সাথে সাথে নয়, একটু থেমে ──
+  // ── Search and price: update after a short pause, not on every keystroke ──
   const [search, setSearch] = useState(searchParams.get("search") ?? "");
   const [minPrice, setMinPrice] = useState(searchParams.get("minPrice") ?? "");
   const [maxPrice, setMaxPrice] = useState(searchParams.get("maxPrice") ?? "");
 
-  // পেছনে/সামনে navigate করলে input গুলো URL-এর সাথে মিলিয়ে নাও
+  // Keep the inputs in sync with the URL when navigating back and forward.
   useEffect(() => {
     setSearch(searchParams.get("search") ?? "");
     setMinPrice(searchParams.get("minPrice") ?? "");
@@ -62,7 +62,7 @@ export function PropertyFilters({ categories }: { categories: Category[] }) {
       maxPrice: searchParams.get("maxPrice") ?? "",
     };
 
-    // কিছুই বদলায়নি → অকারণে navigate কোরো না
+    // Nothing changed -> don't navigate unnecessarily.
     if (
       search === current.search &&
       minPrice === current.minPrice &&
@@ -100,7 +100,7 @@ export function PropertyFilters({ categories }: { categories: Category[] }) {
         isPending && "pointer-events-none opacity-60"
       )}
     >
-      {/* ── হেডার ── */}
+      {/* ── Header ── */}
       <div className="flex items-center justify-between border-b border-border pb-3">
         <p className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
           Filters {activeCount > 0 && `(${activeCount})`}
@@ -232,7 +232,7 @@ export function PropertyFilters({ categories }: { categories: Category[] }) {
   );
 }
 
-/* ── ছোট দুটো সহায়ক ── */
+/* ── Two small helpers ── */
 
 function FilterGroup({
   label,

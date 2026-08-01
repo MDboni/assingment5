@@ -4,8 +4,8 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 
 /**
- * যেকোনো তালিকায় বসানো যায় — শুধু basePath আর searchParams দাও।
- * বর্তমান সব filter ধরে রেখে শুধু page বদলায়।
+ * Can be used on any list — just pass basePath and searchParams.
+ * It preserves the current filters and only changes the page.
  */
 export function PaginationNav({
   basePath,
@@ -34,7 +34,7 @@ export function PaginationNav({
     return `${basePath}?${params.toString()}`;
   };
 
-  // অনেক পাতা হলে সব দেখানো যাবে না — বর্তমানটার আশেপাশে ৫টা
+  // If there are many pages, do not show them all — show 5 around the current page.
   const windowStart = Math.max(1, Math.min(page - 2, totalPages - 4));
   const windowEnd = Math.min(totalPages, windowStart + 4);
 

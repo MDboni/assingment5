@@ -27,9 +27,9 @@ export default function AuthLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <div className="grid min-h-screen lg:grid-cols-[1.1fr_1fr]">
-      {/* ══ বাঁ পাশ: brand panel (mobile-এ লুকানো) ══ */}
+      {/* ══ Left side: brand panel (hidden on mobile) ══ */}
       <aside className="relative hidden overflow-hidden border-r border-border bg-primary/5 lg:flex lg:flex-col lg:justify-between lg:p-12">
-        {/* সূক্ষ্ম grid pattern — blueprint feel */}
+        {/* Subtle grid pattern — gives a blueprint feel. */}
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0 opacity-[0.07]"
@@ -39,7 +39,7 @@ export default function AuthLayout({
             backgroundSize: "56px 56px",
           }}
         />
-        {/* কোণা থেকে আলো */}
+        {/* Glow from the corner. */}
         <div
           aria-hidden
           className="pointer-events-none absolute -left-32 -top-32 size-96 rounded-full bg-primary/20 blur-3xl"
@@ -98,7 +98,7 @@ export default function AuthLayout({
         </div>
       </aside>
 
-      {/* ══ ডান পাশ: form ══ */}
+      {/* ══ Right side: form ══ */}
       <main className="flex flex-col">
         <header className="flex items-center justify-between border-b border-border px-5 py-4 lg:px-10">
           <Link

@@ -17,7 +17,7 @@ export function NavLinks({ className }: { className?: string }) {
   return (
     <nav className={cn("items-center gap-7", className)}>
       {NAV_LINKS.map((link) => {
-        // "/" শুধু হুবহু মিললে active, নাহলে সব রুটেই active দেখাত
+        // "/" should only be active on an exact match; otherwise it looked active on every route.
         const isActive =
           link.href === "/"
             ? pathname === "/"

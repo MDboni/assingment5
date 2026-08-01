@@ -3,8 +3,8 @@ import { cookies } from "next/headers";
 import type { ApiResult } from "@/lib/types";
 
 /**
- * Token সহ backend-এ call। শুধু Server Component / Server Action থেকে।
- * Network fail হলে null — তখন caller "server unreachable" দেখাবে।
+ * Call the backend with a token. Use this only from Server Components / Server Actions.
+ * If the network fails, return null so the caller can show "server unreachable".
  */
 export const authFetch = async <T>(
   path: string,

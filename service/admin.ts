@@ -18,7 +18,7 @@ type ListResult<T> = {
   error: string | null;
 };
 
-/** তিনটে admin list-এর গঠন এক, তাই একটাই helper */
+/** The three admin lists share the same shape, so one helper is enough. */
 const fetchList = async <T>(
   path: string,
   query: Record<string, string | undefined>

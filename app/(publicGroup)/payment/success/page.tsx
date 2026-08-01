@@ -11,7 +11,7 @@ import { getMyPayments } from "@/service/payment";
 export const metadata: Metadata = { title: "Payment successful" };
 
 export default async function PaymentSuccessPage() {
-  // সবচেয়ে সাম্প্রতিক payment-ই এইমাত্র করা payment
+  // The most recent payment is the one that was just made.
   const { payments } = await getMyPayments({ limit: "1" });
   const payment = payments[0] ?? null;
 
@@ -34,7 +34,7 @@ export default async function PaymentSuccessPage() {
             : "We're confirming your payment with Stripe. This usually takes a few seconds."}
         </p>
 
-        {/* ── রসিদ ── */}
+        {/* ── Receipt ── */}
         {payment && (
           <dl className="mt-8 space-y-2.5 border border-border bg-card p-5 text-left">
             <Row label="Transaction">
@@ -59,7 +59,7 @@ export default async function PaymentSuccessPage() {
           </dl>
         )}
 
-        {/* নিশ্চিত না হওয়া পর্যন্ত নিজে থেকে refresh */}
+        {/* Keep refreshing automatically until it is confirmed */}
         {!isConfirmed && <PaymentStatusPoller />}
 
         <div className="mt-8 flex flex-col gap-2 sm:flex-row sm:justify-center">

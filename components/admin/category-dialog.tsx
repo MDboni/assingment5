@@ -45,7 +45,7 @@ export function CategoryDialog({ category }: { category?: Category }) {
     },
   });
 
-  // dialog খুললেই সর্বশেষ মান দিয়ে ভরে দাও
+  // Prefill the dialog with the latest values when it opens.
   useEffect(() => {
     if (open) {
       reset({

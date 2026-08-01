@@ -43,7 +43,7 @@ export default async function AdminDashboardPage() {
   const pendingRentals = rentals.filter((r) => r.status === "PENDING").length;
   const activeRentals = rentals.filter((r) => r.status === "ACTIVE").length;
 
-  // প্রতিটা landlord-এর property যোগ করলেই মোট property
+  // Total properties across all landlords.
   const totalProperties = users.reduce(
     (sum, user) => sum + (user._count?.properties ?? 0),
     0
@@ -92,7 +92,7 @@ export default async function AdminDashboardPage() {
         />
       </div>
 
-      {/* ── role অনুযায়ী ভাগ ── */}
+      {/* ── Grouped by role ── */}
       <section className="grid gap-px border border-border bg-border sm:grid-cols-3">
         {(["TENANT", "LANDLORD", "ADMIN"] as const).map((role) => (
           <div key={role} className="bg-background p-5">
@@ -114,7 +114,7 @@ export default async function AdminDashboardPage() {
         ))}
       </section>
 
-      {/* ── সাম্প্রতিক rental ── */}
+      {/* ── Recent rentals ── */}
       <section>
         <div className="mb-4 flex items-center justify-between">
           <h2 className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">

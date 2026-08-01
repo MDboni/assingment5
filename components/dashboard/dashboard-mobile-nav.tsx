@@ -32,7 +32,7 @@ export function DashboardMobileNav({ role }: { role: UserRole }) {
         </SheetHeader>
 
         <div className="p-4">
-          {/* link চাপলেই drawer বন্ধ */}
+          {/* Close the drawer when a link is clicked */}
           <DashboardSidebar role={role} onNavigate={() => setOpen(false)} />
         </div>
       </SheetContent>

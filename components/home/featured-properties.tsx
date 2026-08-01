@@ -10,7 +10,7 @@ export async function FeaturedProperties() {
     sortOrder: "desc",
   });
 
-  // ── backend পৌঁছানো যাচ্ছে না ──
+  // ── Backend unreachable ──
   if (error) {
     return (
       <div className="border border-destructive/30 bg-destructive/5 p-10 text-center">
@@ -22,7 +22,7 @@ export async function FeaturedProperties() {
     );
   }
 
-  // ── সব ঠিক, কিন্তু কিছুই নেই ──
+  // ── Everything is fine, but there is nothing to show ──
   if (!properties.length) {
     return (
       <div className="border border-dashed border-border p-10 text-center">
@@ -40,7 +40,7 @@ export async function FeaturedProperties() {
         <PropertyCard
           key={property.id}
           property={property}
-          // প্রথম সারির ৩টা ছবি আগে load হোক
+          // Load the first three images first
           priority={index < 3}
         />
       ))}

@@ -36,7 +36,7 @@ export function PropertyForm({
   property,
 }: {
   categories: Category[];
-  /** থাকলে edit mode, না থাকলে create mode */
+  /** Edit mode when provided, create mode otherwise. */
   property?: LandlordProperty;
 }) {
   const router = useRouter();
@@ -72,7 +72,7 @@ export function PropertyForm({
         : "",
       status:
         property?.status === "RENTED"
-          ? "AVAILABLE" // RENTED backend গ্রহণ করে না, তাই বদলে দিচ্ছি
+          ? "AVAILABLE" // RENTED is not accepted by the backend, so map it.
           : (property?.status ?? "AVAILABLE"),
     },
   });
@@ -89,7 +89,7 @@ export function PropertyForm({
       address: values.address,
       city: values.city,
       area: values.area,
-      // এখানেই string → number
+      // Convert string to number here.
       monthlyRent: Number(values.monthlyRent),
       securityDeposit: Number(values.securityDeposit),
       bedrooms: Number(values.bedrooms),
@@ -127,7 +127,7 @@ export function PropertyForm({
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-8">
-      {/* ══ মৌলিক তথ্য ══ */}
+      {/* ══ Basic information ══ */}
       <Section title="Basics">
         <Field
           id="title"
@@ -203,7 +203,7 @@ export function PropertyForm({
         </div>
       </Section>
 
-      {/* ══ অবস্থান ══ */}
+      {/* ══ Location ══ */}
       <Section title="Location">
         <Field
           id="address"
@@ -232,7 +232,7 @@ export function PropertyForm({
         </div>
       </Section>
 
-      {/* ══ দাম ও মাপ ══ */}
+      {/* ══ Pricing and size ══ */}
       <Section title="Pricing & size">
         <div className="grid gap-4 sm:grid-cols-2">
           <Field
@@ -292,7 +292,7 @@ export function PropertyForm({
         />
       </Section>
 
-      {/* ══ সুবিধা ══ */}
+      {/* ══ Amenities ══ */}
       <Section title="Amenities">
         <Controller
           control={control}
@@ -330,7 +330,7 @@ export function PropertyForm({
         />
       </Section>
 
-      {/* ══ ছবি ══ */}
+      {/* ══ Images ══ */}
       <Section title="Images">
         <div className="space-y-3">
           {fields.map((item, index) => {
@@ -339,7 +339,7 @@ export function PropertyForm({
 
             return (
               <div key={item.id} className="flex items-start gap-2">
-                {/* live preview */}
+                {/* Live preview */}
                 <div className="relative size-14 shrink-0 overflow-hidden border border-border bg-muted">
                   {isValidUrl ? (
                     <Image
@@ -405,7 +405,7 @@ export function PropertyForm({
         </Button>
       </Section>
 
-      {/* ══ অবস্থা ══ */}
+      {/* ══ Status ══ */}
       <Section title="Visibility">
         <Controller
           control={control}
@@ -440,7 +440,7 @@ export function PropertyForm({
         />
       </Section>
 
-      {/* ══ কাজ ══ */}
+      {/* ══ Actions ══ */}
       <div className="flex flex-col gap-2 border-t border-border pt-6 sm:flex-row sm:justify-end">
         <Button
           type="button"

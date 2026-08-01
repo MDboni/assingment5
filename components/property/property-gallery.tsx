@@ -30,7 +30,7 @@ export function PropertyGallery({
 
   return (
     <div>
-      {/* ── বড় ছবি ── */}
+      {/* ── Large image ── */}
       <div className="relative aspect-[16/10] overflow-hidden border border-border bg-muted">
         <Image
           key={images[activeIndex]}
@@ -49,7 +49,7 @@ export function PropertyGallery({
         )}
       </div>
 
-      {/* ── থাম্বনেইল ── */}
+      {/* ── Thumbnails ── */}
       {images.length > 1 && (
         <div className="mt-3 grid grid-cols-5 gap-2">
           {images.map((image, index) => (

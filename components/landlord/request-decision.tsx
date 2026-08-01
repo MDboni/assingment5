@@ -30,7 +30,7 @@ export function RequestDecision({
   tenantName: string;
   propertyTitle: string;
   quotedAmount: number;
-  /** parent (RequestList) optimistic update + server call দুটোই সামলায় */
+  /** Parent (RequestList) handles both the optimistic update and the server call. */
   onDecide: (
     requestId: string,
     status: Decision,
@@ -53,7 +53,7 @@ export function RequestDecision({
 
     onDecide(requestId, decision, note.trim() || undefined);
 
-    // dialog সাথে সাথে বন্ধ — badge-ও সাথে সাথেই বদলে যাবে
+    // Close the dialog immediately — the badge updates right away too.
     close();
   };
 

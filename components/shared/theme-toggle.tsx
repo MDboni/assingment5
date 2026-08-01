@@ -10,8 +10,8 @@ export function ThemeToggle() {
   const { resolvedTheme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
-  // server-এ theme জানা যায় না → প্রথম render-এ icon দেখালে
-  // hydration mismatch হয়। তাই mount হওয়ার আগে খালি জায়গা রাখি।
+  // The theme is not known on the server, so showing an icon on the first
+  // render would cause a hydration mismatch. Keep empty space until mount.
   useEffect(() => setMounted(true), []);
 
   if (!mounted) {

@@ -18,7 +18,7 @@ export function PropertyRow({ property }: { property: LandlordProperty }) {
 
   return (
     <article className="flex flex-col gap-4 border border-border bg-card p-4 sm:flex-row sm:items-center">
-      {/* ── থাম্বনেইল ── */}
+      {/* ── Thumbnail ── */}
       <div className="relative aspect-[4/3] w-full shrink-0 overflow-hidden bg-muted sm:size-20">
         {cover ? (
           <Image
@@ -35,7 +35,7 @@ export function PropertyRow({ property }: { property: LandlordProperty }) {
         )}
       </div>
 
-      {/* ── তথ্য ── */}
+      {/* ── Details ── */}
       <div className="min-w-0 flex-1">
         <div className="flex flex-wrap items-center gap-2">
           <Link
@@ -70,7 +70,7 @@ export function PropertyRow({ property }: { property: LandlordProperty }) {
         </div>
       </div>
 
-      {/* ── দাম + কাজ ── */}
+      {/* ── Price + actions ── */}
       <div className="flex items-center justify-between gap-3 sm:justify-end">
         <div className="text-right">
           <p className="text-sm font-semibold text-primary">

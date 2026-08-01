@@ -7,7 +7,7 @@ export type RentalListResult = {
   error: string | null;
 };
 
-/** GET /api/rentals — tenant-এর নিজের সব request */
+/** GET /api/rentals — all requests belonging to the tenant. */
 export const getMyRentals = async (
   query: { status?: string; page?: string; limit?: string } = {}
 ): Promise<RentalListResult> => {

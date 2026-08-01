@@ -16,7 +16,7 @@ export type CheckoutState = {
   checkoutUrl?: string;
 };
 
-/** POST /api/payments/create → Stripe Checkout-এর URL */
+/** POST /api/payments/create → Stripe Checkout URL */
 export const startCheckout = async (
   rentalRequestId: string
 ): Promise<CheckoutState> => {

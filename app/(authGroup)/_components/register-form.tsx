@@ -59,7 +59,7 @@ export function RegisterForm() {
       email: values.email,
       password: values.password,
       role: values.role,
-      // খালি string পাঠালে backend-এর optional check ঘেঁটে যায়
+      // Sending an empty string would trip the backend's optional check.
       ...(values.phone ? { phone: values.phone } : {}),
     });
 
@@ -260,9 +260,9 @@ export function RegisterForm() {
 
 
 /* ─────────────────────────────────────────────
-   একটা label + input + error — বারবার লেখা এড়াতে।
-   ref forward করছি কারণ RHF-এর register() ref দেয়।
-   ───────────────────────────────────────────── */
+  A reusable label + input + error block to avoid repetition.
+  We forward the ref because RHF's register() provides one.
+  ───────────────────────────────────────────── */
 import { forwardRef, type ComponentProps } from "react";
 
 type FieldProps = ComponentProps<typeof Input> & {

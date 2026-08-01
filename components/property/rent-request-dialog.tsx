@@ -83,7 +83,7 @@ export function RentRequestDialog({
     router.push("/tenant-dashboard");
   };
 
-  // <input type="date"> এর min — অতীতের তারিখ বাছাই-ই করা যাবে না
+  // The min on <input type="date"> prevents selecting past dates.
   const todayValue = new Date().toISOString().slice(0, 10);
 
   return (

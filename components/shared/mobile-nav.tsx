@@ -27,7 +27,7 @@ export function MobileNav({ user }: { user: User | null }) {
   const [open, setOpen] = useState(false);
   const [isPending, startTransition] = useTransition();
 
-  // route বদলালে drawer নিজে থেকে বন্ধ হবে
+  // Close the drawer automatically when the route changes.
   useEffect(() => setOpen(false), [pathname]);
 
   const handleLogout = () => {

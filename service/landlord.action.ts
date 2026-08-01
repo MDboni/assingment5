@@ -21,7 +21,7 @@ const toFieldErrors = (error: ApiError) => {
   }, {});
 };
 
-/** create আর update — দুটোর payload একই আকারের */
+/** Create and update share the same payload shape. */
 export type PropertyPayload = {
   title: string;
   description: string;
@@ -128,8 +128,8 @@ export const deleteProperty = async (
 
   refreshProperties();
 
-  // backend চলমান rental থাকলে delete না করে ARCHIVE করে —
-  // তাই ওর নিজের message-টাই দেখাচ্ছি, নিজে বানাচ্ছি না
+  // If the backend archives instead of deleting because of active rentals,
+  // show its own message rather than inventing one here.
   return { success: true, message: result.message };
 };
 
@@ -157,7 +157,7 @@ export const decideRentalRequest = async (
   return { success: true, message: result.message };
 };
 
-/** ACTIVE rental শেষ করা */
+/** Mark an ACTIVE rental as complete. */
 export const completeRentalRequest = async (
   requestId: string
 ): Promise<LandlordActionState> => {

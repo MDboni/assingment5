@@ -45,8 +45,8 @@ export function DashboardSidebar({
         <SidebarLink
           key={item.href}
           item={item}
-          // Overview ("/tenant-dashboard") সব সাব-রুটেই active হয়ে যেত,
-          // তাই ওটার জন্য হুবহু মিল দরকার
+          // Overview ("/tenant-dashboard") would stay active for every sub-route,
+          // so it needs an exact match.
           active={
             item.href.split("/").length === 2
               ? pathname === item.href

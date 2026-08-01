@@ -14,13 +14,13 @@ export function RentalRequestCard({ rental }: { rental: RentalRequest }) {
   const cover = property?.images?.[0];
   const propertyTitle = property?.title ?? "Property";
 
-  // backend শুধু PENDING আর APPROVED cancel করতে দেয়
+  // The backend only allows PENDING and APPROVED requests to be canceled.
   const canCancel =
     rental.status === "PENDING" || rental.status === "APPROVED";
 
   return (
     <article className="flex flex-col gap-4 border border-border bg-card p-4 sm:flex-row">
-      {/* ── থাম্বনেইল ── */}
+      {/* ── Thumbnail ── */}
       <div className="relative aspect-[4/3] w-full shrink-0 overflow-hidden bg-muted sm:w-36">
         {cover ? (
           <Image
@@ -37,7 +37,7 @@ export function RentalRequestCard({ rental }: { rental: RentalRequest }) {
         )}
       </div>
 
-      {/* ── তথ্য ── */}
+      {/* ── Details ── */}
       <div className="flex min-w-0 flex-1 flex-col">
         <div className="flex items-start justify-between gap-3">
           <div className="min-w-0">
@@ -79,7 +79,7 @@ export function RentalRequestCard({ rental }: { rental: RentalRequest }) {
           </p>
         )}
 
-        {/* ── নিচের সারি ── */}
+        {/* ── Bottom row ── */}
         <div className="mt-auto flex items-end justify-between gap-3 pt-4">
           <div>
             <p className="text-sm font-semibold text-primary">
@@ -90,7 +90,7 @@ export function RentalRequestCard({ rental }: { rental: RentalRequest }) {
             </p>
           </div>
 
-          {/* status অনুযায়ী tenant কী করতে পারে */}
+          {/* What the tenant can do based on status */}
           <div className="flex flex-wrap items-center justify-end gap-1.5">
             {canCancel && (
               <CancelRequestButton
@@ -99,7 +99,7 @@ export function RentalRequestCard({ rental }: { rental: RentalRequest }) {
               />
             )}
 
-            {/* APPROVED হলেই কেবল টাকা দেওয়ার সুযোগ */}
+            {/* Payment is available only after APPROVED */}
             {rental.status === "APPROVED" && (
               <PayNowButton rentalRequestId={rental.id} />
             )}
@@ -116,7 +116,7 @@ export function RentalRequestCard({ rental }: { rental: RentalRequest }) {
               </p>
             )}
 
-            {/* backend শুধু COMPLETED rental-এ review নেয় */}
+            {/* The backend only accepts reviews for COMPLETED rentals */}
             {rental.status === "COMPLETED" && (
               <ReviewDialog
                 rentalRequestId={rental.id}

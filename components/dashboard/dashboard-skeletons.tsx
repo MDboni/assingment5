@@ -1,8 +1,8 @@
 import { Skeleton } from "@/components/ui/skeleton";
 
 /**
- * সব dashboard পাতার loading.tsx এখান থেকেই টুকরো নেয়।
- * মাপগুলো আসল component-এর সাথে মিলিয়ে রাখা, যাতে ডেটা এলে কিছু না লাফায়।
+ * All dashboard loading.tsx files reuse pieces from here.
+ * Keep the sizes aligned with the real components so nothing shifts when data loads.
  */
 
 export function PageHeaderSkeleton({ withAction = false }: { withAction?: boolean }) {
@@ -37,7 +37,7 @@ export function StatGridSkeleton({ count = 4 }: { count?: number }) {
   );
 }
 
-/** rental request / property row-এর মতো card */
+/** Card row used for rental requests / properties */
 export function CardListSkeleton({ count = 3 }: { count?: number }) {
   return (
     <div className="space-y-3">
@@ -106,7 +106,7 @@ export function TableSkeleton({
   );
 }
 
-/** filter chip-এর সারি */
+/** Row of filter chips */
 export function FilterRowSkeleton({ count = 5 }: { count?: number }) {
   return (
     <div className="flex flex-wrap gap-1.5">

@@ -7,7 +7,7 @@ export type PaymentListResult = {
   error: string | null;
 };
 
-/** GET /api/payments — নিজের payment history */
+/** GET /api/payments — the user's own payment history. */
 export const getMyPayments = async (
   query: { page?: string; limit?: string; status?: string } = {}
 ): Promise<PaymentListResult> => {

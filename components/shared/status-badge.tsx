@@ -1,7 +1,7 @@
 import type { PaymentStatus, PropertyStatus, RentalStatus } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
-/** assignment-এ যে রঙগুলো চাওয়া হয়েছে, হুবহু সেগুলোই */
+/** The exact colors requested in the assignment. */
 const RENTAL_STYLE: Record<RentalStatus, string> = {
   PENDING: "border-amber-500/30 bg-amber-500/10 text-amber-600 dark:text-amber-400",
   APPROVED: "border-blue-500/30 bg-blue-500/10 text-blue-600 dark:text-blue-400",

@@ -1,7 +1,7 @@
 import type { ApiMeta, ApiResult, Property } from "@/lib/types";
 import type { PropertyDetail } from "@/lib/types";
 
-/** backend যে query param গুলো বোঝে — আমি ওদের interface থেকে হুবহু নিয়েছি */
+/** Query parameters understood by the backend — copied directly from its interface. */
 export type PropertyQuery = {
   search?: string;
   city?: string;
@@ -28,7 +28,7 @@ export type PropertyListResult = {
 export const getProperties = async (
   query: PropertyQuery = {}
 ): Promise<PropertyListResult> => {
-  // undefined / খালি value গুলো বাদ দাও, নাহলে "?city=" পাঠিয়ে filter ভেঙে যাবে
+  // Drop undefined / empty values, otherwise sending "?city=" breaks filtering.
   const params = new URLSearchParams(
     Object.entries(query).filter(([, value]) => value) as [string, string][]
   );
@@ -37,7 +37,7 @@ export const getProperties = async (
     const res = await fetch(
       `${process.env.BACKEND_API_URL}/api/properties?${params}`,
       {
-        // public data — ৬০ সেকেন্ড cache, তারপর background-এ refresh
+        // Public data — cache for 60 seconds, then refresh in the background.
         next: { revalidate: 60, tags: ["properties"] },
       }
     );

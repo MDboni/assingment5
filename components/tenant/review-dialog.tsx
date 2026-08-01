@@ -45,7 +45,7 @@ export function ReviewDialog({
   const [error, setError] = useState<string | null>(null);
   const [isSaving, setIsSaving] = useState(false);
 
-  // hover করলে সেই তারা পর্যন্ত ভরাট দেখাও, নাহলে বাছাই করা রেটিং
+  // Fill stars up to the hovered star; otherwise show the selected rating.
   const displayed = hovered || rating;
 
   const reset = () => {
@@ -108,7 +108,7 @@ export function ReviewDialog({
           </DialogDescription>
         </DialogHeader>
 
-        {/* ── তারা ── */}
+        {/* ── Stars ── */}
         <div className="space-y-1.5">
           <Label className="text-[10px] uppercase tracking-[0.15em] text-muted-foreground">
             Rating
@@ -155,7 +155,7 @@ export function ReviewDialog({
           {error && <p className="text-[11px] text-destructive">{error}</p>}
         </div>
 
-        {/* ── মন্তব্য ── */}
+        {/* ── Comment ── */}
         <div className="space-y-1.5">
           <div className="flex items-center justify-between">
             <Label

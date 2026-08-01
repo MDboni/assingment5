@@ -7,7 +7,7 @@ export default function GlobalError({
   error: Error & { digest?: string };
   unstable_retry: () => void;
 }) {
-  // root layout-ই ভেঙেছে, তাই নিজের <html> আর <body> লাগবে
+  // The root layout failed, so we need our own <html> and <body>.
   return (
     <html lang="en">
       <body

@@ -3,7 +3,7 @@ import type { UserRole } from "@/lib/types";
 export type DashboardNavItem = {
   href: string;
   label: string;
-  /** phosphor icon-এর নাম — component-এ map করব */
+  /** Phosphor icon name — map it in the component. */
   icon: "overview" | "requests" | "payments" | "properties" | "users" | "tags";
 };
 

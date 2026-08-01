@@ -12,8 +12,8 @@ export type ReviewActionState = {
 
 /**
  * POST /api/reviews
- * Backend শর্ত: rental টা নিজের হতে হবে, status COMPLETED হতে হবে,
- * আর প্রতি rental-এ একটাই review।
+ * Backend requirements: the rental must belong to the user, its status must be COMPLETED,
+ * and each rental can only have one review.
  */
 export const createReview = async (payload: {
   rentalRequestId: string;
@@ -40,7 +40,7 @@ export const createReview = async (payload: {
     return { success: false, message: result.message };
   }
 
-  // property page-এর review তালিকা আর rating গড় সাথে সাথে নতুন হোক
+  // Update the property page review list and average rating immediately.
   revalidateTag("properties", "max");
   revalidateTag("my-rentals", "max");
 

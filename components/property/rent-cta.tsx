@@ -8,7 +8,7 @@ import type { PropertyDetail } from "@/lib/types";
 export async function RentCta({ property }: { property: PropertyDetail }) {
   const user = await getCurrentUser();
 
-  // ── property-ই ভাড়া দেওয়ার অবস্থায় নেই ──
+  // ── The property is not available for rent ──
   if (property.status !== "AVAILABLE") {
     return (
       <Button size="lg" className="mt-6 w-full" disabled>
@@ -17,7 +17,7 @@ export async function RentCta({ property }: { property: PropertyDetail }) {
     );
   }
 
-  // ── লগ-ইন করা নেই ──
+  // ── Not signed in ──
   if (!user) {
     return (
       <>
@@ -38,7 +38,7 @@ export async function RentCta({ property }: { property: PropertyDetail }) {
     );
   }
 
-  // ── নিজের property ──
+  // ── Own property ──
   if (user.id === property.landlordId) {
     return (
       <Button size="lg" className="mt-6 w-full" disabled>
@@ -47,7 +47,7 @@ export async function RentCta({ property }: { property: PropertyDetail }) {
     );
   }
 
-  // ── tenant ছাড়া কেউ request পাঠাতে পারবে না ──
+  // ── Only tenants can send requests ──
   if (user.role !== "TENANT") {
     return (
       <>

@@ -8,17 +8,17 @@ import type { ApiError, ApiResult, LoginResponse, User, UserRole } from "@/lib/t
 export type ActionState = {
   success: boolean;
   message: string;
-  /** field-wise error → form-এ inline দেখানোর জন্য */
+  /** Field-wise errors for showing inline in the form. */
   fieldErrors?: Record<string, string>;
-  role?: UserRole; // loginUser-এর জন্য, redirect-এ use করা হয়
+  role?: UserRole; // Used by loginUser for redirects.
 };
 
-/** backend-এর errorDetails[] → { email: "...", password: "..." } */
+/** Convert backend errorDetails[] into { email: "...", password: "..." }. */
 const toFieldErrors = (error: ApiError) => {
   if (!error.errorDetails?.length) return undefined;
 
   return error.errorDetails.reduce<Record<string, string>>((acc, detail) => {
-    // backend path পাঠায় "body.email" আকারে — শেষ অংশটাই field name
+    // The backend sends paths like "body.email" — the last part is the field name.
     const field = detail.path.split(".").pop();
 
     if (field) acc[field] = detail.message;
@@ -27,7 +27,7 @@ const toFieldErrors = (error: ApiError) => {
   }, {});
 };
 
-/** সব auth request-এর common fetch — network fail আলাদা করে ধরা হয় */
+/** Common fetch helper for all auth requests — network failures are handled separately. */
 const postToBackend = async <T>(
   path: string,
   payload: unknown
@@ -42,7 +42,7 @@ const postToBackend = async <T>(
 
     return (await res.json()) as ApiResult<T>;
   } catch {
-    // backend বন্ধ / network fail → null
+    // Backend down / network failure → null.
     return null;
   }
 };
@@ -81,7 +81,7 @@ export const loginUser = async (payload: {
     secure: isProd,
     sameSite: "lax",
     path: "/",
-    maxAge: 60 * 60 * 24, // 1 day — backend-এর expiry-র সাথে মেলানো
+    maxAge: 60 * 60 * 24, // 1 day — matches the backend expiry.
   });
 
   cookieStore.set("refreshToken", refreshToken, {
@@ -92,7 +92,7 @@ export const loginUser = async (payload: {
     maxAge: 60 * 60 * 24 * 7, // 7 days
   });
 
-  // getMe cached ছিল — নতুন user-এর data যেন সাথে সাথেই আসে
+  // getMe was cached — refresh so the new user's data appears immediately.
   revalidateTag("my-profile", "max");
 
   return { success: true, message: result.message };

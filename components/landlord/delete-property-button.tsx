@@ -40,7 +40,7 @@ export function DeletePropertyButton({
       return;
     }
 
-    // backend চলমান rental থাকলে archive করে — তার নিজের message-ই দেখাচ্ছি
+    // If the backend archives a property because it has active rentals, show its own message.
     toast.success(result.message);
 
     setOpen(false);

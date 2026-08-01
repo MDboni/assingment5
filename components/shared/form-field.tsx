@@ -11,9 +11,9 @@ type FieldProps = ComponentProps<typeof Input> & {
 };
 
 /**
- * label + input + inline error — একসাথে।
- * React 19-এ ref সাধারণ prop, তাই forwardRef লাগে না;
- * RHF-এর register() যে ref দেয় সেটা ...props দিয়েই পৌঁছে যায়।
+ * Label + input + inline error in one reusable block.
+ * In React 19, ref is a normal prop, so forwardRef is not needed;
+ * the ref from RHF's register() passes through via ...props.
  */
 export function Field({ id, label, error, className, ...props }: FieldProps) {
   return (

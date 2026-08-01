@@ -25,14 +25,14 @@ export function Hero() {
           backgroundSize: "64px 64px",
         }}
       />
-      {/* সবুজ আভা */}
+      {/* Green glow */}
       <div
         aria-hidden
         className="pointer-events-none absolute -right-40 -top-40 size-[32rem] rounded-full bg-primary/15 blur-3xl"
       />
 
       <div className="relative mx-auto grid w-full max-w-7xl gap-14 px-5 py-16 lg:grid-cols-[1.05fr_1fr] lg:items-center lg:gap-16 lg:px-8 lg:py-24">
-        {/* ══ বাঁ পাশ ══ */}
+        {/* ══ Left side ══ */}
         <div>
           <span className="inline-flex items-center gap-1.5 border border-primary/30 bg-primary/10 px-2.5 py-1 text-[10px] uppercase tracking-[0.15em] text-primary">
             <SealCheckIcon weight="fill" className="size-3" />
@@ -49,7 +49,7 @@ export function Hero() {
             seconds, and pay securely online — all in one place.
           </p>
 
-          {/* ── Search (JS ছাড়াই কাজ করে) ── */}
+          {/* ── Search (works without JS) ── */}
           <form
             action="/properties"
             className="mt-8 flex flex-col gap-2 sm:flex-row"
@@ -71,7 +71,7 @@ export function Hero() {
             </Button>
           </form>
 
-          {/* ── শহরের chip ── */}
+          {/* ── City chips ── */}
           <div className="mt-4 flex flex-wrap items-center gap-2">
             <span className="text-[10px] uppercase tracking-[0.15em] text-muted-foreground">
               Popular
@@ -88,7 +88,7 @@ export function Hero() {
             ))}
           </div>
 
-          {/* ── stats ── */}
+          {/* ── Stats ── */}
           <dl className="mt-10 flex items-center gap-8 border-t border-border pt-6">
             {STATS.map((stat) => (
               <div key={stat.label}>
@@ -104,7 +104,7 @@ export function Hero() {
           </dl>
         </div>
 
-        {/* ══ ডান পাশ: ছবির কোলাজ ══ */}
+        {/* ══ Right side: image collage ══ */}
         <div className="relative hidden lg:block">
           <div className="relative aspect-[4/5] border border-border">
             <Image
@@ -117,7 +117,7 @@ export function Hero() {
             />
           </div>
 
-          {/* ভাসমান ছোট ছবি */}
+          {/* Floating thumbnail */}
           <div className="absolute -bottom-8 -left-10 aspect-[4/3] w-52 border border-border shadow-xl">
             <Image
               src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=500&q=80"
@@ -128,7 +128,7 @@ export function Hero() {
             />
           </div>
 
-          {/* ভাসমান তথ্য-কার্ড */}
+          {/* Floating info card */}
           <div className="absolute -right-6 top-10 border border-border bg-background/95 p-3 shadow-xl backdrop-blur-sm">
             <p className="text-[9px] uppercase tracking-[0.15em] text-muted-foreground">
               Avg. response

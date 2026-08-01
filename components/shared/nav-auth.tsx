@@ -6,9 +6,9 @@ import { Button } from "@/components/ui/button";
 import { getCurrentUser } from "@/service/getMe";
 
 /**
- * async Server Component — Suspense-এর ভিতরে বসে।
- * getMe resolve না হওয়া পর্যন্ত navbar-এর বাকি অংশ আটকে থাকে না,
- * শুধু এই টুকরোটার জায়গায় skeleton দেখায়।
+ * Async Server Component — used inside Suspense.
+ * Until getMe resolves, the rest of the navbar does not block;
+ * only this section shows a skeleton.
  */
 export async function NavAuth() {
   const user = await getCurrentUser();

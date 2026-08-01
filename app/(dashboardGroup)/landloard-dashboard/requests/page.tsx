@@ -33,7 +33,7 @@ export default async function LandlordRequestsPage({
     limit: "50",
   });
 
-  // সিদ্ধান্ত নেওয়ার বাকি গুলো সবার উপরে
+  // Keep undecided requests at the top.
   const sorted = [...requests].sort((a, b) => {
     const priority = (value: string) => (value === "PENDING" ? 0 : 1);
     return priority(a.status) - priority(b.status);

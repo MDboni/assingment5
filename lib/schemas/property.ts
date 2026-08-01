@@ -1,10 +1,10 @@
 import { z } from "zod";
 
 /**
- * সংখ্যার field গুলো ইচ্ছা করে string রেখেছি।
- * কারণ <input type="number"> সবসময় string দেয় — zod-এ number ধরলে
- * খালি ঘরে NaN আসে আর error message অদ্ভুত হয়ে যায়।
- * submit-এর সময় Number() দিয়ে বদলে নেব।
+ * I intentionally keep the numeric fields as strings.
+ * <input type="number"> always returns a string, and if zod expects a number
+ * then an empty field becomes NaN and the error message gets awkward.
+ * We'll convert with Number() at submit time.
  */
 const numericField = (label: string) =>
   z
@@ -52,7 +52,7 @@ export const propertySchema = z.object({
 
   amenities: z.array(z.string()),
 
-  // useFieldArray object চায়, তাই খালি string নয়
+  // useFieldArray expects objects, so avoid empty strings.
   images: z
     .array(z.object({ url: z.string().url("Enter a valid image URL") }))
     .min(1, "Add at least one image URL"),

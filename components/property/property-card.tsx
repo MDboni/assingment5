@@ -31,7 +31,7 @@ export function PropertyCard({
       href={`/properties/${property.id}`}
       className="group flex flex-col border border-border bg-card transition-all duration-300 hover:border-primary/50 hover:shadow-[0_8px_30px_-12px_var(--primary)]"
     >
-      {/* ── ছবি ── */}
+      {/* ── Image ── */}
       <div className="relative aspect-[4/3] overflow-hidden bg-muted">
         {cover ? (
           <Image
@@ -62,7 +62,7 @@ export function PropertyCard({
         ) : null}
       </div>
 
-      {/* ── তথ্য ── */}
+      {/* ── Details ── */}
       <div className="flex flex-1 flex-col p-4">
         <h3 className="line-clamp-1 text-sm font-medium transition-colors group-hover:text-primary">
           {property.title}

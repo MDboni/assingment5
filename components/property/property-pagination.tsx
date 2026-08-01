@@ -14,7 +14,7 @@ export function PropertyPagination({
 }) {
   if (totalPages <= 1) return null;
 
-  /** বর্তমান সব filter ধরে রেখে শুধু page বদলাই */
+  /** Preserve the current filters and change only the page. */
   const hrefFor = (target: number) => {
     const params = new URLSearchParams();
 

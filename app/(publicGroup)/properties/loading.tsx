@@ -4,7 +4,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 export default function PropertiesLoading() {
   return (
     <div className="mx-auto w-full max-w-7xl px-5 py-10 lg:px-8 lg:py-14">
-      {/* শিরোনাম */}
+      {/* Title */}
       <div className="space-y-3 border-b border-border pb-8">
         <Skeleton className="h-2 w-16" />
         <Skeleton className="h-8 w-64" />
@@ -12,7 +12,7 @@ export default function PropertiesLoading() {
       </div>
 
       <div className="mt-8 lg:grid lg:grid-cols-[240px_1fr] lg:gap-10">
-        {/* sidebar filter */}
+        {/* Sidebar filter */}
         <aside className="hidden space-y-7 lg:block">
           <Skeleton className="h-3 w-20" />
 

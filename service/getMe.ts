@@ -3,8 +3,8 @@ import { cookies } from "next/headers";
 import type { ApiResult, User } from "@/lib/types";
 
 /**
- * বর্তমান logged-in user — না থাকলে null।
- * শুধু Server Component / Server Action থেকে ডাকবে।
+ * The current logged-in user, or null if there is none.
+ * Call this only from Server Components / Server Actions.
  */
 export const getCurrentUser = async (): Promise<User | null> => {
   const cookieStore = await cookies();
@@ -22,7 +22,7 @@ export const getCurrentUser = async (): Promise<User | null> => {
 
     return result.success ? result.data : null;
   } catch {
-    // backend বন্ধ থাকলেও navbar যেন crash না করে
+    // Do not let the navbar crash if the backend is down.
     return null;
   }
 };

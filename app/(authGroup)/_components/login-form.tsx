@@ -17,7 +17,7 @@ import { cn } from "@/lib/utils";
 
 import { loginUser } from "../_action/auth";
 
-/** ডেমো/পরীক্ষার জন্য — এক ক্লিকে credential ভরে যাবে */
+/** Demo/testing helper — fills credentials with one click. */
 const DEMO_ACCOUNTS = [
   { label: "Tenant", email: "tenant@rentnest.com", password: "tenant123" },
   { label: "Landlord", email: "landlord@rentnest.com", password: "landlord123" },
@@ -44,7 +44,7 @@ export function LoginForm() {
     const result = await loginUser(values);
 
     if (!result.success) {
-      // backend যদি field-wise error দেয় → ঠিক input-এর নিচে বসাও
+      // If the backend returns field-wise errors, show them under the matching inputs.
       if (result.fieldErrors) {
         Object.entries(result.fieldErrors).forEach(([field, message]) => {
           setError(field as keyof LoginValues, { type: "server", message });
@@ -57,14 +57,14 @@ export function LoginForm() {
 
     toast.success(result.message);
 
-    // protected route থেকে এসে থাকলে সেখানেই ফেরত পাঠাও,
-    // নাহলে role-ভিত্তিক dashboard
+    // If the user came from a protected route, send them back there;
+    // otherwise go to the role-based dashboard.
     const redirectTo =
       searchParams.get("redirect") ??
       (result.role ? DASHBOARD_PATH[result.role] : "/");
 
     router.push(redirectTo);
-    // cookie নতুন বসেছে — Server Component গুলো (Navbar) যেন নতুন করে render হয়
+    // The cookies were just set — re-render Server Components like the Navbar.
     router.refresh();
   };
 

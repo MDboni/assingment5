@@ -31,7 +31,7 @@ export const createRentalRequest = async (payload: {
     method: "POST",
     body: JSON.stringify({
       propertyId: payload.propertyId,
-      // backend ISO datetime চায়, <input type="date"> দেয় "2026-08-15"
+      // The backend expects ISO datetimes, while <input type="date"> gives "2026-08-15".
       moveInDate: new Date(payload.moveInDate).toISOString(),
       ...(payload.moveOutDate
         ? { moveOutDate: new Date(payload.moveOutDate).toISOString() }
@@ -62,7 +62,7 @@ export const createRentalRequest = async (payload: {
 
 /**
  * PATCH /api/rentals/:id/cancel
- * Backend শুধু PENDING আর APPROVED request cancel করতে দেয়।
+ * The backend only allows PENDING and APPROVED requests to be canceled.
  */
 export const cancelRentalRequest = async (
   rentalRequestId: string

@@ -1,4 +1,4 @@
-/** সবই backend-এর আসল ডেটা থেকে নেওয়া */
+/** Everything here comes from the backend's real data. */
 
 export const CITIES = ["Dhaka", "Chattogram", "Sylhet"] as const;
 

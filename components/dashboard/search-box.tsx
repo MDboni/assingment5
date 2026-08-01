@@ -6,7 +6,7 @@ import { useEffect, useState, useTransition } from "react";
 
 import { cn } from "@/lib/utils";
 
-/** URL-এর ?search= চালায়। যেকোনো তালিকায় বসানো যায়। */
+/** Drives the ?search= URL param. Can be used on any list. */
 export function SearchBox({ placeholder = "Search…" }: { placeholder?: string }) {
   const router = useRouter();
   const pathname = usePathname();
@@ -15,7 +15,7 @@ export function SearchBox({ placeholder = "Search…" }: { placeholder?: string 
 
   const [value, setValue] = useState(searchParams.get("search") ?? "");
 
-  // back/forward করলে input যেন URL-এর সাথে মেলে
+  // Keep the input in sync with the URL when navigating back/forward.
   useEffect(() => {
     setValue(searchParams.get("search") ?? "");
   }, [searchParams]);
@@ -31,7 +31,7 @@ export function SearchBox({ placeholder = "Search…" }: { placeholder?: string 
       if (value) params.set("search", value);
       else params.delete("search");
 
-      params.delete("page"); // নতুন খোঁজ = ১ নম্বর পাতা
+      params.delete("page"); // New search = page 1
 
       startTransition(() => {
         router.push(`${pathname}?${params.toString()}`, { scroll: false });

@@ -12,12 +12,12 @@ export default async function DashboardLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   const user = await getCurrentUser();
 
-  // proxy.ts আগেই আটকে দেওয়ার কথা — এটা দ্বিতীয় স্তরের প্রতিরক্ষা
+  // proxy.ts should already block this — this is a second layer of defense.
   if (!user) redirect("/login");
 
   return (
     <div className="flex min-h-screen flex-col">
-      {/* ── উপরের বার ── */}
+      {/* ── Top bar ── */}
       <header className="sticky top-0 z-40 border-b border-border glass">
         <div className="flex h-14 items-center justify-between gap-4 px-5 lg:px-6">
           <div className="flex items-center gap-3">
@@ -34,7 +34,7 @@ export default async function DashboardLayout({
       </header>
 
       <div className="flex flex-1">
-        {/* ── বাঁ sidebar (desktop) ── */}
+        {/* ── Left sidebar (desktop) ── */}
         <aside className="hidden w-56 shrink-0 border-r border-border lg:block">
           <div className="sticky top-14 p-4">
             <DashboardSidebar role={user.role} />

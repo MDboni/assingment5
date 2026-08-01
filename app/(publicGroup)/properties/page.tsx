@@ -24,7 +24,7 @@ export const metadata: Metadata = {
 
 type SearchParams = Record<string, string | string[] | undefined>;
 
-/** URL-এর string গুলো থেকে backend-এর query বানাই */
+/** Build the backend query from URL strings. */
 const toQuery = (params: SearchParams): PropertyQuery => {
   const pick = (key: string) => {
     const value = params[key];
@@ -52,18 +52,18 @@ export default async function PropertiesPage({
 }: {
   searchParams: Promise<SearchParams>;
 }) {
-  // Next 16-এ searchParams একটা Promise — await করতেই হবে
+  // In Next 16, searchParams is a Promise, so we have to await it.
   const params = await searchParams;
 
   const categories = await getCategories();
   const query = toQuery(params);
 
-  // filter বদলালে Suspense যেন আবার skeleton দেখায়, তাই key
+  // When filters change, give Suspense a new key so it shows the skeleton again.
   const resultsKey = JSON.stringify(params);
 
   return (
     <div className="mx-auto w-full max-w-7xl px-5 py-10 lg:px-8 lg:py-14">
-      {/* ── শিরোনাম ── */}
+      {/* ── Title ── */}
       <div className="border-b border-border pb-8">
         <p className="text-[10px] uppercase tracking-[0.25em] text-primary">
           Browse

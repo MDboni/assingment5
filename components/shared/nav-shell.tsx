@@ -5,9 +5,9 @@ import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 
 /**
- * শুধু scroll state-টুকু client-এ।
- * ভিতরের children (Brand, NavAuth…) Server Component-ই থাকে —
- * Server Component client component-এর children হিসেবে যেতে পারে।
+ * Keep only the scroll state on the client.
+ * The children inside (Brand, NavAuth…) stay Server Components —
+ * Server Components can be passed as children to client components.
  */
 export function NavShell({ children }: { children: React.ReactNode }) {
   const [scrolled, setScrolled] = useState(false);
@@ -15,7 +15,7 @@ export function NavShell({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
 
-    onScroll(); // refresh করলে যদি আগে থেকেই নিচে থাকে
+    onScroll(); // Handle the case where the page is already scrolled on refresh.
     window.addEventListener("scroll", onScroll, { passive: true });
 
     return () => window.removeEventListener("scroll", onScroll);

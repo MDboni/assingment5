@@ -38,7 +38,7 @@ export function ProfileForm({ user }: { user: User }) {
   const onSubmit = async (values: ProfileValues) => {
     const result = await updateMyProfile({
       name: values.name,
-      // খালি string পাঠালে backend-এর min(6) fail করত
+      // Sending an empty string would fail the backend's min(6) check.
       ...(values.phone ? { phone: values.phone } : {}),
       ...(values.bio ? { bio: values.bio } : {}),
     });
@@ -67,7 +67,7 @@ export function ProfileForm({ user }: { user: User }) {
         {...register("name")}
       />
 
-      {/* email বদলানো যায় না — backend-ও গ্রহণ করে না */}
+      {/* Email cannot be changed — the backend does not accept it either. */}
       <div className="space-y-1.5">
         <Label
           htmlFor="email"

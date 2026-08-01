@@ -20,8 +20,8 @@ export default async function EditPropertyPage({
     getMyProperties({ limit: "100" }),
   ]);
 
-  // নিজের তালিকা থেকেই খুঁজছি — public endpoint ARCHIVED property দেয় না,
-  // আর অন্যের property edit করার সুযোগও এভাবে বন্ধ থাকে
+  // Look it up from my own listings — the public endpoint does not return ARCHIVED properties,
+  // and this also blocks editing someone else's property.
   const property = propertyResult.properties.find((item) => item.id === id);
 
   if (!property) notFound();

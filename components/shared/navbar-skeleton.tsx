@@ -1,6 +1,6 @@
 import { Skeleton } from "@/components/ui/skeleton";
 
-/** getMe resolve হওয়ার আগে navbar-এর ডান কোণায় যা দেখাবে */
+/** What shows in the navbar's right corner before getMe resolves. */
 export function NavAuthSkeleton() {
   return (
     <div className="flex items-center gap-2">
