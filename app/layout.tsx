@@ -22,6 +22,10 @@ export const metadata: Metadata = {
   },
   description:
     "Browse verified rentals, send requests, and pay securely. RentNest connects tenants with landlords.",
+  icons: {
+    icon: "/icon.svg",
+    shortcut: "/icon.svg",
+  },
 };
 
 export default function RootLayout({
