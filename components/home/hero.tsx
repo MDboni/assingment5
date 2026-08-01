@@ -105,26 +105,36 @@ export function Hero() {
         </div>
 
         {/* ══ Right side: image collage ══ */}
-        <div className="relative hidden lg:block">
-          <div className="relative aspect-[4/5] border border-border">
+        <div className="hero-collage relative hidden lg:block hero-collage-enter">
+          <div className="relative aspect-[4/5] overflow-hidden border border-border">
             <Image
               src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=900&q=80"
               alt="Modern two-storey house available for rent"
               fill
               priority
               sizes="(max-width: 1024px) 0px, 40vw"
-              className="object-cover"
+              className="hero-main-image object-cover"
+            />
+
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0)_0%,rgba(0,0,0,0.02)_100%)]"
             />
           </div>
 
           {/* Floating thumbnail */}
-          <div className="absolute -bottom-8 -left-10 aspect-[4/3] w-52 border border-border shadow-xl">
+          <div className="hero-thumbnail absolute -bottom-8 -left-10 aspect-[4/3] w-52 border border-border bg-background shadow-xl">
             <Image
               src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=500&q=80"
               alt="Furnished living room of a rental apartment"
               fill
               sizes="208px"
               className="object-cover"
+            />
+
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-0 border border-white/10"
             />
           </div>
 
@@ -139,6 +149,7 @@ export function Hero() {
           </div>
         </div>
       </div>
+
     </section>
   );
 }
