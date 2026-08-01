@@ -1,4 +1,4 @@
-import { ArrowLeftIcon, SealCheckIcon, ShieldCheckIcon, LightningIcon } from "@phosphor-icons/react/dist/ssr";
+import { ArrowLeftIcon, GearSixIcon, SealCheckIcon, ShieldCheckIcon, LightningIcon } from "@phosphor-icons/react/dist/ssr";
 import Link from "next/link";
 
 import { Brand } from "@/components/shared/brand";
@@ -26,9 +26,12 @@ export default function AuthLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <div className="grid min-h-screen lg:grid-cols-[1.1fr_1fr]">
+    <div className="relative grid min-h-screen overflow-hidden bg-background lg:grid-cols-[1.1fr_1fr]">
+      <div aria-hidden className="auth-background-grid pointer-events-none absolute inset-0" />
+      <GearSixIcon aria-hidden weight="thin" className="auth-background-gear pointer-events-none absolute -bottom-[34rem] left-1/2 size-[58rem] -translate-x-1/2 text-primary opacity-[0.09] sm:-bottom-[28rem] sm:size-[72rem] lg:-bottom-[31rem] lg:size-[86rem]" />
+      <div aria-hidden className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_100%,color-mix(in_oklch,var(--primary)_16%,transparent),transparent_42%)]" />
       {/* ══ Left side: brand panel (hidden on mobile) ══ */}
-      <aside className="relative hidden overflow-hidden border-r border-border bg-primary/5 lg:flex lg:flex-col lg:justify-between lg:p-12">
+      <aside className="relative z-10 hidden overflow-hidden border-r border-border bg-primary/5 lg:flex lg:flex-col lg:justify-between lg:p-12">
         {/* Subtle grid pattern — gives a blueprint feel. */}
         <div
           aria-hidden
@@ -99,8 +102,8 @@ export default function AuthLayout({
       </aside>
 
       {/* ══ Right side: form ══ */}
-      <main className="flex flex-col">
-        <header className="flex items-center justify-between border-b border-border px-5 py-4 lg:px-10">
+      <main className="relative z-10 flex flex-col">
+        <header className="relative z-10 flex items-center justify-between border-b border-border px-5 py-4 lg:px-10">
           <Link
             href="/"
             className="inline-flex items-center gap-1.5 text-[11px] text-muted-foreground transition-colors hover:text-foreground"
@@ -117,7 +120,7 @@ export default function AuthLayout({
           </div>
         </header>
 
-        <div className="flex flex-1 items-center justify-center px-5 py-12 lg:px-10">
+        <div className="relative z-10 flex flex-1 items-center justify-center px-5 py-12 lg:px-10">
           {children}
         </div>
       </main>

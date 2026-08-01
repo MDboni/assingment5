@@ -246,3 +246,36 @@
     will-change: transform, opacity;
   }
 }
+
+@media (prefers-reduced-motion: no-preference) {
+  .auth-background-gear {
+    animation: auth-gear-spin 65s linear infinite;
+    will-change: transform;
+  }
+
+  .auth-background-grid {
+    animation: auth-background-drift 24s ease-in-out infinite;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .auth-background-gear,
+  .auth-background-grid {
+    animation: none !important;
+  }
+}
+
+@keyframes auth-gear-spin {
+  to { transform: translateX(-50%) rotate(360deg); }
+}
+
+@keyframes auth-background-drift {
+  0%, 100% { background-position: 0 0, 0 0; }
+  50% { background-position: 56px 56px, -56px 56px; }
+}
+
+.auth-background-grid {
+  opacity: 0.045;
+  background-image: linear-gradient(to right, var(--primary) 1px, transparent 1px), linear-gradient(to bottom, var(--primary) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
