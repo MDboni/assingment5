@@ -13,15 +13,17 @@ import { NavAuth } from "./nav-auth";
 export function Navbar() {
   return (
     <NavShell>
-      <div className="mx-auto flex h-14 w-full max-w-7xl items-center justify-between gap-4 px-5 lg:px-8">
+      <div className="mx-auto grid h-14 w-full max-w-7xl grid-cols-[auto_1fr_auto] items-center gap-4 px-5 lg:px-8">
         {/* ── বাঁ পাশ ── */}
-        <div className="flex items-center gap-8">
+        <div className="flex items-center gap-8 justify-self-start">
           <Brand />
-          <NavLinks className="hidden md:flex" />
         </div>
 
+        {/* ── মাঝখান ── */}
+        <NavLinks className="hidden md:flex justify-self-center" />
+
         {/* ── ডান পাশ ── */}
-        <div className="flex items-center gap-1.5">
+        <div className="flex items-center gap-1.5 justify-self-end">
           <Button
             variant="ghost"
             size="icon"
