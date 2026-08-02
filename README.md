@@ -12,7 +12,7 @@ moderate the whole platform.
 
 | Item | URL |
 | --- | --- |
-| Live frontend | _add your Vercel URL_ |
+| Live frontend | https://rentnest-three.vercel.app |
 | Backend API | https://assingment4-nu.vercel.app |
 | Frontend repo | https://github.com/MDboni/assingment5 |
 | Backend repo | https://github.com/MDboni/assingment4 |
@@ -103,7 +103,7 @@ command and output directory on their defaults.
 | --- | --- |
 | `BACKEND_API_URL` | `https://assingment4-nu.vercel.app` — no trailing slash |
 | `JWT_ACCESS_SECRET` | the exact value from the **backend** Vercel project |
-| `NEXT_PUBLIC_APP_URL` | `https://<this-project>.vercel.app` (fill in after the first deploy) |
+| `NEXT_PUBLIC_APP_URL` | `https://rentnest-three.vercel.app` — the frontend's own domain |
 
 `JWT_ACCESS_SECRET` must match the backend character for character. If it differs, `proxy.ts`
 cannot verify the token, and every login bounces straight back to `/login`.
@@ -112,9 +112,9 @@ cannot verify the token, and every login bounces straight back to `/login`.
 the backend:
 
 ```bash
-APP_URL=https://<this-project>.vercel.app                              # CORS origin
-STRIPE_SUCCESS_URL=https://<this-project>.vercel.app/payment/success
-STRIPE_CANCEL_URL=https://<this-project>.vercel.app/payment/cancel
+APP_URL=https://rentnest-three.vercel.app                              # CORS origin
+STRIPE_SUCCESS_URL=https://rentnest-three.vercel.app/payment/success
+STRIPE_CANCEL_URL=https://rentnest-three.vercel.app/payment/cancel
 ```
 
 **4. Point the Stripe webhook** at `https://assingment4-nu.vercel.app/api/payments/confirm`
