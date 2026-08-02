@@ -63,7 +63,7 @@ export function Footer() {
           </p>
 
           <p className="text-[10px] text-muted-foreground">
-            Built with Next.js · Assignment 5
+            Built with Next.js ·
             
           </p>
           <p className="text-[10px] text-muted-foreground">
