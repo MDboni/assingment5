@@ -13,8 +13,9 @@ moderate the whole platform.
 | Item | URL |
 | --- | --- |
 | Live frontend | _add your Vercel URL_ |
-| Backend API | _add your API URL_ |
-| Frontend repo | _add your repo URL_ |
+| Backend API | https://assingment4-nu.vercel.app |
+| Frontend repo | https://github.com/MDboni/assingment5 |
+| Backend repo | https://github.com/MDboni/assingment4 |
 | Demo video | _add your video URL_ |
 
 ### Test accounts
@@ -50,10 +51,10 @@ The login page has one-click buttons that fill these in.
 **1. Install**
 
 ```bash
-npm install
+pnpm install
 ```
 
-**2. Create `.env`**
+**2. Create `.env`** (copy `.env.example`)
 
 ```bash
 BACKEND_API_URL=http://localhost:5000
@@ -87,6 +88,38 @@ stripe listen --forward-to localhost:5000/api/payments/confirm
 
 Put the `whsec_…` it prints into the backend's `STRIPE_WEBHOOK_SECRET` and restart it.
 Test card: `4242 4242 4242 4242`, any future expiry, any CVC.
+
+---
+
+## Deploying to Vercel
+
+**1. Import the repo** on [vercel.com](https://vercel.com) → **Add New → Project** →
+`MDboni/assingment5`. Framework preset is detected as Next.js; leave root directory, build
+command and output directory on their defaults.
+
+**2. Add the environment variables** (Production, Preview and Development):
+
+| Key | Value |
+| --- | --- |
+| `BACKEND_API_URL` | `https://assingment4-nu.vercel.app` — no trailing slash |
+| `JWT_ACCESS_SECRET` | the exact value from the **backend** Vercel project |
+| `NEXT_PUBLIC_APP_URL` | `https://<this-project>.vercel.app` (fill in after the first deploy) |
+
+`JWT_ACCESS_SECRET` must match the backend character for character. If it differs, `proxy.ts`
+cannot verify the token, and every login bounces straight back to `/login`.
+
+**3. Update the backend project's env vars** to point at the new frontend domain, then redeploy
+the backend:
+
+```bash
+APP_URL=https://<this-project>.vercel.app                              # CORS origin
+STRIPE_SUCCESS_URL=https://<this-project>.vercel.app/payment/success
+STRIPE_CANCEL_URL=https://<this-project>.vercel.app/payment/cancel
+```
+
+**4. Point the Stripe webhook** at `https://assingment4-nu.vercel.app/api/payments/confirm`
+(event `checkout.session.completed`) and put the `whsec_…` into the backend's
+`STRIPE_WEBHOOK_SECRET`.
 
 ---
 
